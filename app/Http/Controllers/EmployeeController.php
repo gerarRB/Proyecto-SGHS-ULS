@@ -13,11 +13,12 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::select('employees.id', 'employees.name', 'email', 'phone','carnet','total_hours','student_hours',
+        $employees = Employee::select('employees.id', 'employees.name', 'email', 'phone','carnet','total_hours','student_hours','description',
             'department_id', 'departments.name as department', 'place_id', 'places.name as place')
             ->join('departments', 'departments.id', '=', 'employees.department_id')
             ->join('places', 'places.id', '=', 'employees.place_id')
-            ->paginate(10);
+            
+            ->paginate(4);
 
         $departments = Department::all();
         $places = Place::all();
@@ -38,6 +39,7 @@ class EmployeeController extends Controller
             'carnet' => 'required|max:10',
             'total_hours' => 'required|max:4',
             'student_hours' => 'required|max:4',
+            'description' => 'required|max:1000',
             'department_id' => 'required|numeric',
             'place_id' => 'required|numeric',
         ]);
@@ -56,6 +58,7 @@ class EmployeeController extends Controller
             'carnet' => 'required|max:10',
             'total_hours' => 'required|max:4',
             'student_hours' => 'required|max:4',
+            'description' => 'required|max:1000',
             'department_id' => 'required|numeric',
             'place_id' => 'required|numeric',
         ]);
@@ -91,14 +94,14 @@ class EmployeeController extends Controller
     public function reports()
     {
         // Obtiene empleados junto con departamentos y lugares
-        $employees = Employee::select('employees.id', 'employees.name', 'email', 'phone','carnet','total_hours','student_hours',
+        $employees = Employee::select('employees.id', 'employees.name', 'email', 'phone','carnet','total_hours','student_hours','description',
             'department_id', 'departments.name as department', 'place_id', 'places.name as place')
             ->join('departments', 'departments.id', '=', 'employees.department_id')
             ->join('places', 'places.id', '=', 'employees.place_id')
             ->get();
 
         $departments = Department::all();
-        $places = Place::all(); // Si necesitas lugares en esta vista
+        $places = Place::all(); 
 
         return Inertia::render('Employees/Reports', [
             'employees' => $employees,

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('carnet',10);
             $table->string('total_hours',4);
             $table->string('student_hours',4);
+            $table->string('description',1000);
 
             $table->foreignId('department_id')
             ->constrained('departments')

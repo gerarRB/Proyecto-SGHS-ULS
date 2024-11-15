@@ -29,7 +29,7 @@ const props = defineProps({
 });
 
 const form = useForm({
-    name: '', email: '', phone: '', carnet: '', total_hours: '', student_hours: '', department_id: '', place_id: ''
+    name: '', email: '', phone: '', carnet: '', total_hours: '', student_hours: '', department_id: '', place_id: '', description: ''
 });
 
 const formPage = useForm({});
@@ -37,7 +37,7 @@ const onPageClick = (event) => {
     formPage.get(route('employees.index', { page: event }));
 }
 
-const openModal = (op, name, email, phone, carnet, total_hours, student_hours, department, place, employee) => {
+const openModal = (op, name, email, phone, carnet, total_hours, student_hours, department, place, description, employee) => {
     modal.value = true;
     nextTick(() => nameInput.value.focus());
     operation.value = op;
@@ -55,6 +55,7 @@ const openModal = (op, name, email, phone, carnet, total_hours, student_hours, d
         form.student_hours = student_hours;
         form.department_id = department;
         form.place_id = place;
+        form.description = description;
     }
 }
 
@@ -135,6 +136,7 @@ const deleteEmployee = (id, name) => {
                             <th class="px-2 py-2">Carnet</th>
                             <th class="px-2 py-2">Carrera</th>
                             <th class="px-2 py-2">Lugar</th>
+                            <th class="px-2 py-2">Descripción</th>
                             <th class="px-2 py-2">Hours</th>
                             <th class="px-2 py-2">Worked</th>
                             <th class="px-2 py-2">Detail</th>
@@ -151,6 +153,7 @@ const deleteEmployee = (id, name) => {
                             <td class="border border-gray-400 px-2 py-2">{{ emp.carnet }}</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.department }}</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.place }}</td>
+                            <td class="border border-gray-400 px-2 py-2">{{ emp.description }}</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.total_hours }} hrs.</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.student_hours }} hrs.</td>
                             <td class="border border-gray-400 px-2 py-2">
@@ -160,7 +163,7 @@ const deleteEmployee = (id, name) => {
                             </td>
                             <td class="border border-gray-400 px-2 py-2">
                                 <WarningButton 
-                                    @click="$event => openModal(2, emp.name, emp.email, emp.phone, emp.carnet, emp.total_hours, emp.student_hours, emp.department_id, emp.place_id, emp.id)">
+                                    @click="$event => openModal(2, emp.name, emp.email, emp.phone, emp.carnet, emp.total_hours, emp.student_hours, emp.department_id, emp.place_id, emp.description, emp.id)">
                                     <i class="fa-solid fa-edit"></i>
                                 </WarningButton>
                             </td>
@@ -176,7 +179,7 @@ const deleteEmployee = (id, name) => {
             <div class="bg-white grid v-screen place-items-center">
                 <vueTailwindPaginationUmd
                     :current="employees.currentPage" :total="employees.total"
-                    :per-page="employees.perPage"
+                    :per-page="4"
                     @page-changed="$event => onPageClick($event)"
                 ></vueTailwindPaginationUmd>
             </div>
@@ -266,6 +269,16 @@ const deleteEmployee = (id, name) => {
                 />
                 <InputError class="mt-2" :message="form.errors.place_id" />
             </div>
+            <div class="p-3">
+                <InputLabel for="description" value="Descripción:" />
+                <textarea
+                    id="description"
+                    type="textarea"
+                    class="mt-1 block w-full"
+                    v-model="form.description"
+                />
+                <InputError class="mt-2" :message="form.errors.description" />
+            </div>
             <div class="flex justify-end p-3">
                 <PrimaryButton @click="save">{{ operation === 1 ? 'Crear' : 'Actualizar' }}</PrimaryButton>
                 <SecondaryButton @click="closeModal">Cerrar</SecondaryButton>
@@ -298,6 +311,10 @@ const deleteEmployee = (id, name) => {
             <div class="p-3">
                 <InputLabel for="place" value="Lugar:" />
                 <div class="mt-1 block w-3/4">{{ selectedEmployee.place }}</div>
+            </div>
+            <div class="p-3">
+                <InputLabel for="description" value="Descripción:" />
+                <div class="mt-1 block w-3/4">{{ selectedEmployee.description }}</div>
             </div>
             <div class="p-3">
                 <InputLabel for="total_hours" value="Total Horas:" />
