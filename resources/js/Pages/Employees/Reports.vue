@@ -43,6 +43,7 @@ columns1.value= [{data:null, render:function(data,type,row,meta)
     {data:'carnet'},
     {data:'department'},
     {data:'place'},
+    {data:'year'},
     {data:'description'},
     {data:'total_hours'},
     {data:'student_hours'},
@@ -64,6 +65,7 @@ columns4.value= [{data:null, render:function(data,type,row,meta)
     {data:'carnet'},
     {data:'department'},
     {data:'place'},
+    {data:'year'},
     {data:'description'},
     {data:'total_hours'},
     {data:'student_hours'},
@@ -190,6 +192,7 @@ buttons4.value= [
                     <th class="px-2 py-2">Carnet</th>
                     <th class="px-2 py-2">Carrera</th>
                     <th class="px-2 py-2">Lugar</th>
+                    <th class="px-2 py-2">Año</th>
                     <th class="px-2 py-2">Descripción</th>
                     <th class="px-2 py-2">Hours</th>
                     <th class="px-2 py-2">Worked</th>
@@ -233,6 +236,7 @@ buttons4.value= [
                     <th class="px-2 py-2">Carnet</th>
                     <th class="px-2 py-2">Carrera</th>
                     <th class="px-2 py-2">Lugar</th>
+                    <th class="px-2 py-2">Año</th>
                     <th class="px-2 py-2">Descripción</th>
                     <th class="px-2 py-2">Hours</th>
                     <th class="px-2 py-2">Worked</th>

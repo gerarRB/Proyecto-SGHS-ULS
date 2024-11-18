@@ -8,6 +8,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\YearController;
+use App\Models\Year;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +52,7 @@ Route::middleware('auth')->group(function () {
         ]);
 
     Route::resource('places', PlaceController::class);
+    Route::resource('years', YearController::class);
 
     Route::resource('students', EmployeeController::class)
     ->parameters(['students' => 'employee'])
@@ -62,7 +65,7 @@ Route::middleware('auth')->group(function () {
         'destroy' => 'employees.destroy'
     ]);
 
-    Route::get('graphic', [EmployeeController::class,'EmployeeByDepartment'])->name('graphic');
+    Route::get('graphic', [EmployeeController::class,'EmployeeByYear'])->name('graphic');
     Route::get('reports', [EmployeeController::class,'reports'])->name('reports');
 
 

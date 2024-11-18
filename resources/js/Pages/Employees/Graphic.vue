@@ -23,7 +23,9 @@ const props = defineProps({
 });
 
 // Variables reactivas
-const departments = ref([]);
+// const departments = ref([]);
+// const places = ref([]);
+const years = ref([]);
 const employees = ref([]);
 const chartData = ref([]);
 const chartOptions = ref([]);
@@ -36,7 +38,9 @@ const random = () => {
 
 // Procesar los datos de las props
 props.data.map(row => (
-  departments.value.push(row.name),
+  //departments.value.push(row.name),
+  //places.value.push(row.name),
+  years.value.push(row.name),
   employees.value.push(row.count),
   colors.value.push(`rgb(${random()},${random()},${random()})`)
 ));
@@ -44,7 +48,9 @@ props.data.map(row => (
 // Configuración del gráfico
 chartOptions.value = { responsive: true };
 chartData.value = {
-  labels: departments.value,
+  //labels: departments.value,
+  //labels: places.value,
+  labels: years.value,
   datasets: [
     { label: 'Estudiantes', data: employees.value, backgroundColor: colors.value }
   ]

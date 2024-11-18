@@ -25,11 +25,12 @@ const selectedEmployee = ref({});
 const props = defineProps({
     employees: { type: Object },
     departments: { type: Object },
-    places: { type: Object }
+    places: { type: Object },
+    years: { type: Object },
 });
 
 const form = useForm({
-    name: '', email: '', phone: '', carnet: '', total_hours: '', student_hours: '', department_id: '', place_id: '', description: ''
+    name: '', email: '', phone: '', carnet: '', total_hours: '', student_hours: '', department_id: '', place_id: '', year_id: '', description: ''
 });
 
 const formPage = useForm({});
@@ -37,7 +38,7 @@ const onPageClick = (event) => {
     formPage.get(route('employees.index', { page: event }));
 }
 
-const openModal = (op, name, email, phone, carnet, total_hours, student_hours, department, place, description, employee) => {
+const openModal = (op, name, email, phone, carnet, total_hours, student_hours, department, place, year, description, employee) => {
     modal.value = true;
     nextTick(() => nameInput.value.focus());
     operation.value = op;
@@ -55,6 +56,7 @@ const openModal = (op, name, email, phone, carnet, total_hours, student_hours, d
         form.student_hours = student_hours;
         form.department_id = department;
         form.place_id = place;
+        form.year_id = year;
         form.description = description;
     }
 }
@@ -136,6 +138,7 @@ const deleteEmployee = (id, name) => {
                             <th class="px-2 py-2">Carnet</th>
                             <th class="px-2 py-2">Carrera</th>
                             <th class="px-2 py-2">Lugar</th>
+                            <th class="px-2 py-2">Año</th>
                             <th class="px-2 py-2">Descripción</th>
                             <th class="px-2 py-2">Hours</th>
                             <th class="px-2 py-2">Worked</th>
@@ -153,6 +156,7 @@ const deleteEmployee = (id, name) => {
                             <td class="border border-gray-400 px-2 py-2">{{ emp.carnet }}</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.department }}</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.place }}</td>
+                            <td class="border border-gray-400 px-2 py-2">{{ emp.year }}</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.description }}</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.total_hours }} hrs.</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.student_hours }} hrs.</td>
@@ -163,7 +167,7 @@ const deleteEmployee = (id, name) => {
                             </td>
                             <td class="border border-gray-400 px-2 py-2">
                                 <WarningButton 
-                                    @click="$event => openModal(2, emp.name, emp.email, emp.phone, emp.carnet, emp.total_hours, emp.student_hours, emp.department_id, emp.place_id, emp.description, emp.id)">
+                                    @click="$event => openModal(2, emp.name, emp.email, emp.phone, emp.carnet, emp.total_hours, emp.student_hours, emp.department_id, emp.place_id, emp.year_id, emp.description, emp.id)">
                                     <i class="fa-solid fa-edit"></i>
                                 </WarningButton>
                             </td>
@@ -270,6 +274,16 @@ const deleteEmployee = (id, name) => {
                 <InputError class="mt-2" :message="form.errors.place_id" />
             </div>
             <div class="p-3">
+                <InputLabel for="year_id" value="Año:" />
+                <SelectInput 
+                    id="year_id"
+                    class="mt-1 block w-full"
+                    v-model="form.year_id"
+                    :options="years"
+                />
+                <InputError class="mt-2" :message="form.errors.year_id" />
+            </div>
+            <div class="p-3">
                 <InputLabel for="description" value="Descripción:" />
                 <textarea
                     id="description"
@@ -311,6 +325,10 @@ const deleteEmployee = (id, name) => {
             <div class="p-3">
                 <InputLabel for="place" value="Lugar:" />
                 <div class="mt-1 block w-3/4">{{ selectedEmployee.place }}</div>
+            </div>
+            <div class="p-3">
+                <InputLabel for="year" value="Año:" />
+                <div class="mt-1 block w-3/4">{{ selectedEmployee.year }}</div>
             </div>
             <div class="p-3">
                 <InputLabel for="description" value="Descripción:" />

@@ -28,6 +28,10 @@ return new class extends Migration
             $table->foreignId('place_id')
             ->constrained('places')
             ->onUpdate('cascade')->onDelete('restrict');
+
+            $table->foreignId('year_id')
+            ->constrained('years')
+            ->onUpdate('cascade')->onDelete('restrict');
             
             $table->timestamps();
         });

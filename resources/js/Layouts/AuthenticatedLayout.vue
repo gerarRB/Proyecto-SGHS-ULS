@@ -44,6 +44,11 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('years.index')" :active="route().current('years.index')">
+                                    Años
+                                </NavLink>
+                            </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('employees.index')" :active="route().current('employees.index')">
                                     Estudiantes
                                 </NavLink>
@@ -145,6 +150,9 @@ const showingNavigationDropdown = ref(false);
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('places.index')" :active="route().current('places.index')">
                             Lugares
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('years.index')" :active="route().current('years.index')">
+                            Años
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('employees.index')" :active="route().current('employees.index')">
                             Estudiantes
