@@ -35,18 +35,24 @@ const buttons4 = ref([]);
 const report = ref('1');
 const types = ref([{'id':'1','name':'Estudiantes'},{'id':'2','name':'Carreras'},{'id':'3','name':'Lugares'},{'id':'4','name':'Estudiantes/Horas'}]);
 
-columns1.value= [{data:null, render:function(data,type,row,meta)
-    {return (meta.row + 1)}},
-    {data:'name'},
-    {data:'email'},
-    {data:'phone'},
-    {data:'carnet'},
-    {data:'department'},
-    {data:'place'},
-    {data:'year'},
-    {data:'description'},
-    {data:'total_hours'},
-    {data:'student_hours'},
+columns1.value= [
+    { data: null, render: function (data, type, row, meta) { return (meta.row + 1); } },
+    { data: 'name' },
+    { data: 'carnet' },
+    { data: 'department' },
+    { data: 'place' },
+    { data: 'year' },
+    { data: 'description' },
+    { data: 'total_hours' },
+    { data: 'student_hours' },
+    {
+        data: null,
+        render: function (data, type, row) {
+            const remainingHours = row.total_hours - row.student_hours;
+            return remainingHours >= 0 ? remainingHours : 0;
+        },
+        title: 'Hrs.R'
+    },
 ]
 
 columns2.value= [{data:null, render:function(data,type,row,meta)
@@ -59,17 +65,28 @@ columns3.value= [{data:null, render:function(data,type,row,meta)
     {data:'name'}
 ]
 
-columns4.value= [{data:null, render:function(data,type,row,meta)
-    {return (meta.row + 1)}},
-    {data:'name'},
-    {data:'carnet'},
-    {data:'department'},
-    {data:'place'},
-    {data:'year'},
-    {data:'description'},
-    {data:'total_hours'},
-    {data:'student_hours'},
+columns4.value = [
+    { data: null, render: function (data, type, row, meta) { return (meta.row + 1); } },
+    { data: 'name' },
+    { data: 'carnet' },
+    { data:'email' },
+    { data:'phone' },
+    { data: 'department' },
+    { data: 'place' },
+    { data: 'year' },
+    { data: 'description' },
+    { data: 'total_hours' },
+    { data: 'student_hours' },
+    {
+        data: null,
+        render: function (data, type, row) {
+            const remainingHours = row.total_hours - row.student_hours;
+            return remainingHours >= 0 ? remainingHours : 0;
+        },
+        title: 'Hrs.R'
+    },
 ]
+
 buttons1.value= [
     {
         title:'Estudiantes',extend:'excelHtml5',
@@ -187,15 +204,13 @@ buttons4.value= [
                 <tr class="bg-gray-100">
                     <th class="px-2 py-2">N#</th>
                     <th class="px-2 py-2">Nombre</th>
-                    <th class="px-2 py-2">Correo</th>
-                    <th class="px-2 py-2">Teléfono</th>
                     <th class="px-2 py-2">Carnet</th>
                     <th class="px-2 py-2">Carrera</th>
                     <th class="px-2 py-2">Lugar</th>
                     <th class="px-2 py-2">Año</th>
                     <th class="px-2 py-2">Descripción</th>
-                    <th class="px-2 py-2">Hours</th>
-                    <th class="px-2 py-2">Worked</th>
+                    <th class="px-2 py-2">Hrs.T</th>
+                    <th class="px-2 py-2">Hrs.F</th>
                 </tr>
             </thead>
             </DataTable>
@@ -233,13 +248,15 @@ buttons4.value= [
                 <tr class="bg-gray-100">
                     <th class="px-2 py-2">N#</th>
                     <th class="px-2 py-2">Nombre</th>
+                    <th class="px-2 py-2">Correo</th>
+                    <th class="px-2 py-2">Teléfono</th>
                     <th class="px-2 py-2">Carnet</th>
                     <th class="px-2 py-2">Carrera</th>
                     <th class="px-2 py-2">Lugar</th>
                     <th class="px-2 py-2">Año</th>
                     <th class="px-2 py-2">Descripción</th>
-                    <th class="px-2 py-2">Hours</th>
-                    <th class="px-2 py-2">Worked</th>
+                    <th class="px-2 py-2">Hrs.T</th>
+                    <th class="px-2 py-2">Hrs.F</th>
                 </tr>
             </thead>
             </DataTable>

@@ -40,8 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('career', DepartmentController::class)
-        ->parameters(['career' => 'department']) 
+    Route::resource('university_degree', DepartmentController::class)
+        ->parameters(['university_degree' => 'department']) 
         ->names([
             'index' => 'departments.index',
             'create' => 'departments.create',

@@ -77,11 +77,11 @@ const closeViewModal = () => {
 const save = () => {
     if (operation.value == 1) {
         form.post(route('employees.store'), {
-            onSuccess: () => { ok('Estudiante Created') }
+            onSuccess: () => { ok('Estudiante Creado') }
         });
     } else {
         form.put(route('employees.update', id.value), {
-            onSuccess: () => { ok('Estudiante Update') }
+            onSuccess: () => { ok('Estudiante Actualizado') }
         });
     }
 }
@@ -97,14 +97,14 @@ const deleteEmployee = (id, name) => {
         buttonsStyling: true
     });
     alerta.fire({
-        title: 'Are you sure delete ' + name + '?',
+        title: 'Estas seguro de eliminar a ' + name + '?',
         icon: 'question', showCancelButton: true,
-        confirmButtonText: '<i class="fa-solid fa-check"></i> Yes, delete',
-        cancelButtonText: '<i class="fa-solid fa-ban"></i> Cancel'
+        confirmButtonText: '<i class="fa-solid fa-check"></i> Sí, eliminar',
+        cancelButtonText: '<i class="fa-solid fa-ban"></i> Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
             form.delete(route('employees.destroy', id), {
-                onSuccess: () => { ok('Estudiante Deleted') }
+                onSuccess: () => { ok('Estudiante Eliminado') }
             });
         }
     })
@@ -133,16 +133,17 @@ const deleteEmployee = (id, name) => {
                         <tr class="bg-gray-100">
                             <th class="px-2 py-2">N#</th>
                             <th class="px-2 py-2">Nombre</th>
-                            <th class="px-2 py-2">Correo</th>
+                            <!-- <th class="px-2 py-2">Correo</th> -->
                             <th class="px-2 py-2">Teléfono</th>
                             <th class="px-2 py-2">Carnet</th>
                             <th class="px-2 py-2">Carrera</th>
                             <th class="px-2 py-2">Lugar</th>
                             <th class="px-2 py-2">Año</th>
                             <th class="px-2 py-2">Descripción</th>
-                            <th class="px-2 py-2">Hours</th>
-                            <th class="px-2 py-2">Worked</th>
-                            <th class="px-2 py-2">Detail</th>
+                            <th class="px-2 py-2">Total.Hrs</th>
+                            <th class="px-2 py-2">Terminadas</th>
+                            <th class="px-2 py-2">Hrs.Restantes</th>
+                            <th class="px-2 py-2">Detalle</th>
                             <th class="px-2 py-2">Editar</th>
                             <th class="px-2 py-2">Eliminar</th>
                         </tr>
@@ -151,7 +152,7 @@ const deleteEmployee = (id, name) => {
                         <tr v-for="(emp, i) in employees.data" :key="emp.id">
                             <td class="border border-gray-400 px-2 py-2">{{ (i + 1) }}</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.name }}</td>
-                            <td class="border border-gray-400 px-2 py-2">{{ emp.email }}</td>
+                            <!-- <td class="border border-gray-400 px-2 py-2">{{ emp.email }}</td> -->
                             <td class="border border-gray-400 px-2 py-2">{{ emp.phone }}</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.carnet }}</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.department }}</td>
@@ -160,6 +161,7 @@ const deleteEmployee = (id, name) => {
                             <td class="border border-gray-400 px-2 py-2">{{ emp.description }}</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.total_hours }} hrs.</td>
                             <td class="border border-gray-400 px-2 py-2">{{ emp.student_hours }} hrs.</td>
+                            <td class="border border-gray-400 px-2 py-2">{{ emp.remaining_hours }} hrs.</td>
                             <td class="border border-gray-400 px-2 py-2">
                                 <button @click="openViewModal(emp)">
                                     <i class="fa-regular fa-eye fa-2xl" style="color: #24a0ff;"></i>
@@ -341,6 +343,10 @@ const deleteEmployee = (id, name) => {
             <div class="p-3">
                 <InputLabel for="student_hours" value="Horas Trabajadas:" />
                 <div class="mt-1 block w-3/4">{{ selectedEmployee.student_hours }} hrs.</div>
+            </div>
+            <div class="p-3">
+                <InputLabel for="student_hours" value="Horas Restantes:" />
+                <div class="mt-1 block w-3/4">{{ selectedEmployee.remaining_hours}} hrs.</div>
             </div>
             <div class="flex justify-end p-3">
                 <SecondaryButton @click="closeViewModal">Cerrar</SecondaryButton>

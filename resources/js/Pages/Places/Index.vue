@@ -15,10 +15,10 @@ const deletePlace = (id,name) =>{
         buttonsStyling:true
     });
     alerta.fire({
-        title: 'Are you sure delete ' + name+'?',
+        title: 'Estas seguro de eliminar ' + name+'?',
         icon: 'question', showCancelButton:true,
-        confirmButtonText:'<i class="fa-solid fa-check"></i> Yes, delete',
-        cancelButtonText:'<i class="fa-solid fa-ban"></i> Cancel'
+        confirmButtonText:'<i class="fa-solid fa-check"></i> Sí, eliminar',
+        cancelButtonText:'<i class="fa-solid fa-ban"></i> Cancelar'
     }).then((result) => {
         if(result.isConfirmed) {
             form.delete(route('places.destroy', id));

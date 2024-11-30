@@ -15,6 +15,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::select('employees.id', 'employees.name', 'email', 'phone','carnet','total_hours','student_hours','description',
+            DB::raw('(total_hours - student_hours) as remaining_hours'), // Campo calculado
             'department_id', 'departments.name as department', 'place_id', 'places.name as place', 'year_id', 'years.name as year')
             ->join('departments', 'departments.id', '=', 'employees.department_id')
             ->join('places', 'places.id', '=', 'employees.place_id')
